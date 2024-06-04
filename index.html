@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+   <style>
+    body {
+    font-family: 'Arial', sans-serif;
+    background: #ffdde1; /* Light pink background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.calculator {
+    background: #fff;
+    border: 2px solid #ff6f91; /* Pink border */
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    text-align: center;
+}
+
+h1 {
+    color: #ff6f91;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.mode-switch {
+    margin-bottom: 20px;
+}
+
+.mode-switch button {
+    padding: 10px;
+    margin: 5px;
+    font-size: 1em;
+    background-color: #ff6f91;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s ease;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.mode-switch button:hover {
+    background-color: #ff4d6d;
+}
+
+#display {
+    background: #ffe4e1;
+    border: 2px solid #ff6f91;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 2em;
+    border-radius: 5px;
+    min-height: 50px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.buttons button {
+    padding: 20px;
+    font-size: 1.2em;
+    background-color: #ff6f91;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s ease;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.buttons button:hover {
+    background-color: #ff4d6d;
+}
+
+   </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Calculator</h1>
+        <div class="mode-switch">
+            <button onclick="switchMode('basic')">Basic Mode</button>
+            <button onclick="switchMode('pro')">Pro Mode</button>
+        </div>
+        <div id="display">0</div>
+        <div class="buttons">
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button onclick="appendOperation('+')">+</button>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button onclick="appendOperation('-')">-</button>
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button onclick="appendOperation('*')">*</button>
+            <button onclick="appendNumber('0')">0</button>
+            <button onclick="appendOperation('/')">/</button>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="calculateResult()">=</button>
+        </div>
+    </div>
+   <script>
+    let currentMode = 'basic';
+let displayValue = '0';
+
+function switchMode(mode) {
+    currentMode = mode;
+    clearDisplay();
+}
+
+function appendNumber(number) {
+    if (displayValue === '0') {
+        displayValue = number;
+    } else {
+        displayValue += number;
+    }
+    updateDisplay();
+}
+
+function appendOperation(operation) {
+    displayValue += ` ${operation} `;
+    updateDisplay();
+}
+
+function clearDisplay() {
+    displayValue = '0';
+    updateDisplay();
+}
+
+function calculateResult() {
+
+        if (currentMode === 'pro')  {
+        displayValue = 'I miss u so much';
+        alert("ARE YOU SURE WANT TO CONTINUE?? ")
+       
+    } else {
+        try {
+            displayValue = eval(displayValue).toString();
+        } catch (error) {
+            displayValue = 'Error';
+        }
+        
+    }
+    updateDisplay();
+}
+
+function updateDisplay() {
+    document.getElementById('display').innerText = displayValue;
+}
+
+   </script>
+</body>
+</html>
